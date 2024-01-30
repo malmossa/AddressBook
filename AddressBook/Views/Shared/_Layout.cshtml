@@ -51,15 +51,29 @@
         </nav>
         <!-- END NAV BAR -->
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <main class="content" id="mainHero">
+        <section class="container-fluid h-100">
             @RenderBody()
-        </main>
-    </div>
+        </section>
+    </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - AddressBook - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer container-fluid">
+        <div class="row align-items-center py-2">
+            <div class="col">
+                <div class="row align-items-center gy-2">
+                    <div class="col d-flex justify-content-center justify-content-md-start order-last order-md-first copyright">
+                        &copy; 2024 Mason All Rights Reserved
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <img src="/img/AdreesBook_logo.png" height="50">
+                    </div>
+                    <div class="col-12 col-md d-flex justify-content-center justify-content-md-end">
+                        <a href="#" class="socialicons"><i class="bi bi-linkedin p-2 "></i></a>                
+                        <a href="#" class="socialicons"><i class="bi bi-youtube p-2 "></i></a>
+                        <a href="#" class="socialicons"><i class="bi bi-github p-2"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
