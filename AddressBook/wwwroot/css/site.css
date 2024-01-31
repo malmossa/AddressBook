@@ -1,7 +1,7 @@
 :root {
-    --cf-primaryColor: #0869b8;
-    --cf-primaryColorDark: #002a4e;
-    --cf-primaryColorLight: #ffffff;
+    --cf-primaryColor: #649C75;
+    --cf-primaryColorDark: #003300;
+    --cf-primaryColorLight: #9CCC9A;
     --cf-secondaryColor: #fff0d9;
     --cf-secondaryColorLight: #FFF8EC;
     --cf-dark-color: #131313;
@@ -18,7 +18,7 @@ body {
 
 body {
     /* fallback for old browsers */
-    background-color: var(--cf-primaryColorLight);
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     color: var(--cf-dark-color);
@@ -31,25 +31,25 @@ body {
 /*-- Button styles override Bootstrap Styles --*/
 .btn-outline-primary {
     color: var(--cf-dark-color);
-    border-color: var(--cf-primaryColor) !important;
+    border-color: #000000 !important;
 }
 
     .btn-outline-primary:hover,
     .btn-outline-primary:active,
     .btn-outline-primary:focus {
-        border-color: var(--cf-secondaryColor) !important;
-        background-color: var(--cf-primaryColor);
+        border-color: #000000 !important;
+        background-color: #082B28;
     }
 
 .btn-primary {
-    color: white !important;
-    background-color: var(--cf-primaryColor) !important;
-    border-color: var(--cf-secondary-color);
+    color: #ffffff !important;
+    background-color: #082B28 !important;
+    border-color: #000000;
 }
 
     .btn-primary:hover {
         filter: brightness(1.2) !important;
-        border-color: var(--cf-primaryColorDark);
+        border-color: #082B28;
     }
 
     .btn-primary:active,
@@ -79,7 +79,7 @@ h6 {
 
 
 main {
-    background-color: var(--cf-primaryColorLight);
+    background-color: #ffffff;
 }
 
 .content {
@@ -158,12 +158,12 @@ main {
 
 .footer {
     flex-shrink: 0;
-    background-color: var(--cf-secondaryColor);
+    background-color: var(--cf-primaryColorLight);
 }
 
 .copyright {
     color: var(--cf-primaryColorDark);
-    font-size: .9rem;
+    font-size: 1rem;
 }
 
 .socialicons {
@@ -173,7 +173,7 @@ main {
 }
 
     .socialicons:hover {
-        color: var(--cf-primaryColor);
+        color: #082B28;
         opacity: 1;
         cursor: pointer;
     }
@@ -204,5 +204,9 @@ main {
 @media (min-width: 1200px) {
     .heroTitle {
         font-size: 3.5rem;
+    }
+   
+    nav {
+        text-align: center;
     }
 }
