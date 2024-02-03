@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-12 col-lg-4 mt-2">
                         <label asp-for="State" class="control-label"></label>
-                        <select asp-for="State" class="form-control"></select>
+                        <select asp-for="State" class="form-control" asp-items="ViewBag.StatesList"></select>
                         <span asp-validation-for="State" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-2 mt-2">
