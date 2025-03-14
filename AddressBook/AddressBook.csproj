@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.14" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
   </ItemGroup>
 
 </Project>
