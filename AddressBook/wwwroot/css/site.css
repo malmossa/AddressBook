@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* HEADER */
+.logo {
+    height: 60px;
+    width: 250px;
+}
+
+/* FOOTER */
+footer {
+    color: #404040;
+}
+
+.footer-brand i {
+    color: red;
+}
+
+.footer-brand a {
+    color: #404040 !important;
+    text-decoration: none;
+    font-style: italic;
+}
