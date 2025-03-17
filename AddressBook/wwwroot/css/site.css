@@ -21,10 +21,8 @@ body {
   margin-bottom: 60px;
 }
 
-/* HEADER */
-.logo {
-    height: 60px;
-    width: 250px;
+.icon {
+    font-size: 3.5rem;
 }
 
 /* FOOTER */
