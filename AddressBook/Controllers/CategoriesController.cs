@@ -63,7 +63,7 @@ namespace AddressBook.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserID);
             return View(category);
         }
 
@@ -80,7 +80,7 @@ namespace AddressBook.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserID);
             return View(category);
         }
 
@@ -116,7 +116,7 @@ namespace AddressBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserID);
             return View(category);
         }
 

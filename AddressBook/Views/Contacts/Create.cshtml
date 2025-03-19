@@ -16,10 +16,10 @@
                 <div class="col-12 col-lg-4">
 
                     <div class="square-img-container">
-                        <img class=" square-img" src="~/img/DefaultContactImage.png" />
+                        <img id="contactImage" class=" square-img" src="~/img/DefaultContactImage.png" />
                     </div>
                     <div class="mt-2">
-                        <input asp-for="ImageFile" class="form-control" accept=".png, .jpg, .jpeg, .gif" />
+                        <input asp-for="ImageFile" class="form-control" accept=".png, .jpg, .jpeg, .gif" onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0]);" />
                         <span asp-validation-for="ImageFile" class="text-danger"></span>
                     </div>
 
@@ -65,9 +65,9 @@
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
                         <div class="col-12 col-lg-4 mt-2">
-                            <label asp-for="state" class="control-label"></label>
-                            <select asp-for="state" class="form-control" asp-items="ViewBag.StatesList"></select>
-                            <span asp-validation-for="state" class="text-danger"></span>
+                            <label asp-for="State" class="control-label"></label>
+                            <select asp-for="State" class="form-control" asp-items="ViewBag.StatesList"></select>
+                            <span asp-validation-for="State" class="text-danger"></span>
                         </div>
                         <div class="col-12 col-lg-2 mt-2">
                             <label asp-for="ZipCode" class="control-label"></label>
@@ -79,9 +79,9 @@
                             <select name="CategoryList" class="form-control" asp-items="ViewBag.CategoryList" multiple></select>
                         </div>
                         <div class="col-12 col-lg-6 mt-3">
-                            <label asp-for="Birthday" class="control-label"></label>
-                            <input asp-for="Birthday" class="form-control" />
-                            <span asp-validation-for="Birthday" class="text-danger"></span>
+                            <label asp-for="BirthDate" class="control-label"></label>
+                            <input asp-for="BirthDate" class="form-control" />
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
                         </div>
                                                                   
                         <div class="col-12 d-flex justify-content-end mt-2">
