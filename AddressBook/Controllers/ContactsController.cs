@@ -1,11 +1,12 @@
 ﻿using AddressBook.Data;
+using AddressBook.Enums;
 using AddressBook.Models;
+using AddressBook.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using AddressBook.Enums;
 
 namespace AddressBook.Controllers
 {
@@ -14,11 +15,15 @@ namespace AddressBook.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IImageService _imageService;
 
-        public ContactsController(ApplicationDbContext context,UserManager<AppUser> userManager)
+        public ContactsController(ApplicationDbContext context,
+                                  UserManager<AppUser> userManager,
+                                  IImageService imageService)
         {
             _context = context;
             _userManager = userManager;
+            _imageService = imageService;
         }
 
         // GET: Contacts
@@ -61,18 +66,24 @@ namespace AddressBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Birthday,Address1,Address2,City,state,ZipCode,Email,PhoneNumber,ImageFile")] Contact contact)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,BirthDate,Address1,Address2,City,State,ZipCode,Email,PhoneNumber,ImageFile")] Contact contact)
         {
             ModelState.Remove("AppUserId");
 
             if (ModelState.IsValid)
             {
-                contact.AppUserId = _userManager.GetUserId(User);
+                contact.AppUserID = _userManager.GetUserId(User);
                 contact.Created = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
 
-                if (contact.Birthday != null)
+                if (contact.BirthDate != null)
                 {
-                    contact.Birthday = DateTime.SpecifyKind(contact.Birthday.Value, DateTimeKind.Utc);
+                    contact.BirthDate = DateTime.SpecifyKind(contact.BirthDate.Value, DateTimeKind.Utc);
+                }
+
+                if (contact.ImageData != null)
+                {
+                    contact.ImageData = await _imageService.ConvertFileToByteArrayAsync(contact.ImageFile);
+                    contact.ImageType = contact.ImageFile.ContentType;
                 }
 
                 _context.Add(contact);
@@ -96,7 +107,7 @@ namespace AddressBook.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserID);
             return View(contact);
         }
 
@@ -132,7 +143,7 @@ namespace AddressBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserID);
             return View(contact);
         }
 

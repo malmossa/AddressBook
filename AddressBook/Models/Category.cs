@@ -7,7 +7,7 @@ namespace AddressBook.Models
         public int Id { get; set; }
 
         [Required]
-        public string? AppUserId { get; set; }
+        public string? AppUserID { get; set; }
 
         [Required]
         [Display(Name = "Category Name")]
