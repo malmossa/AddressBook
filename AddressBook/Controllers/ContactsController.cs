@@ -16,14 +16,17 @@ namespace AddressBook.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IImageService _imageService;
+        private readonly IAddressBookService _addressBookService;
 
         public ContactsController(ApplicationDbContext context,
                                   UserManager<AppUser> userManager,
-                                  IImageService imageService)
+                                  IImageService imageService,
+                                  IAddressBookService addressBookService)
         {
             _context = context;
             _userManager = userManager;
             _imageService = imageService;
+            _addressBookService = addressBookService;
         }
 
         // GET: Contacts
@@ -53,10 +56,12 @@ namespace AddressBook.Controllers
         }
 
         // GET: Contacts/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["StatesList"] = new SelectList(Enum.GetValues(typeof(States)).Cast<States>().ToList());    
+            string appUserId = _userManager.GetUserId(User);
+
+            ViewData["StatesList"] = new SelectList(Enum.GetValues(typeof(States)).Cast<States>().ToList());
+            ViewData["CategoryList"] = new MultiSelectList(await _addressBookService.GetUserCategoriesAsync(appUserId), "Id", "Name"); 
 
             return View();
         }
