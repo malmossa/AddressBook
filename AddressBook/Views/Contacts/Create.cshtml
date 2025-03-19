@@ -19,7 +19,8 @@
                         <img id="contactImage" class=" square-img" src="~/img/DefaultContactImage.png" />
                     </div>
                     <div class="mt-2">
-                        <input asp-for="ImageFile" class="form-control" accept=".png, .jpg, .jpeg, .gif" onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0]);" />
+                        <input asp-for="ImageFile" class="form-control" accept=".png, .jpg, .jpeg, .gif" 
+                        onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0]);" />
                         <span asp-validation-for="ImageFile" class="text-danger"></span>
                     </div>
 
