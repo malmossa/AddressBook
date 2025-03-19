@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+
 html {
     font-size: 14px;
 }
@@ -21,6 +23,11 @@ body {
     margin-bottom: 60px;
 }
 
+.navbar-brand {
+    font-family: "Uncial Antiqua", system-ui;
+    font-size: 2rem;
+}
+
 .icon {
     font-size: 3.5rem;
 }
@@ -30,9 +37,13 @@ body {
     border: 5px dotted #f8c0c2;
     border-radius: 10px;
 }
+
 .square-img-container::after {
+   
     content: "";
+   
     display: block;
+   
     padding-bottom: 100%;
 }
 
