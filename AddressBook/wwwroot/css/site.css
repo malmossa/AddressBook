@@ -34,16 +34,13 @@ body {
 
 .square-img-container {
     position: relative;
-    border: 5px dotted #f8c0c2;
-    border-radius: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
-.square-img-container::after {
-   
+.square-img-container::after {  
     content: "";
-   
     display: block;
-   
     padding-bottom: 100%;
 }
 
@@ -54,8 +51,6 @@ body {
     object-fit: cover;
     object-position: top;
 }
-
-
 
 
 /* FOOTER */
