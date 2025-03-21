@@ -27,8 +27,8 @@
             <div class="mt-5">
                 <label class="form-label fw-bold">CATEGORY FILTER</label>
 
-                <select name="id" asp-items="@ViewBag.CategoryId" class="form-control"
-                onchange="this.form.submit()" onfocus="this.selectedIndex=-1;this.blur();">
+                <select name="CategoryId" asp-items="@ViewBag.CategoryId" class="form-control"
+                        onchange="this.form.submit()" onfocus="this.selectedIndex=-1;this.blur();">
                     <option>All Contacts</option>
                 </select>
             </div>
