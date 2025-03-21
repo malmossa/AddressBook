@@ -32,7 +32,10 @@ namespace AddressBook.Controllers
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Contacts.Include(c => c.AppUser);
+        {
+            List<Contact> contacts = new List<Contact>();
+                string appUserId = _userManager.GetUserId(User);
+
             return View(await applicationDbContext.ToListAsync());
         }
 
