@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AddressBook.Models.Contact>
 @using AddressBook.Services.Interfaces
 
-@inject IImageService ImageService 
+@inject IImageService ImageService
 
 @{
     ViewData["Title"] = "Index";
@@ -9,73 +9,68 @@
 
 <div class="row mb-2">
     <div class="col-12 text-end mb-2">
-        <a class="btn btn-secondary rounded-pill" asp-action="Create">Create New</a>
+        <a class="btn btn-secondary rounded-pill" asp-action="Create">Add New Contact</a>
     </div>
 </div>
 
-<div class="row g-2">
-
-    <div class="col-12 col-md-4 bg-primary p-4 rounded h-25">
-        <form asp-action="SearchContacts" asp-controller="Contacts">
-            <div class="input-group">
-                <input class="form-control" type="search" name="searchString"
-                placeholder="Search Term" />
-                <input type="submit" class="btn btn-secondary" value="Search" />
-            </div>
-        </form>
-        <form asp-action="Index" asp-controller="Contacts">
-            <div class="mt-5">
-                <label class="form-label fw-bold">CATEGORY FILTER</label>
-
-                <select name="CategoryId" asp-items="@ViewBag.CategoryId" class="form-control"
-                        onchange="this.form.submit()" onfocus="this.selectedIndex=-1;this.blur();">
-                    <option>All Contacts</option>
-                </select>
-            </div>
-        </form>
-    </div>
 
 
-    <div class="col-12 col-md-8">
-        <div class="row row-cols-1 g-3">
+<div class="row">
+    <form asp-action="SearchContacts" asp-controller="Contacts" class="col-12 col-md-8 mb-3">
+        <div class="input-group">
+            <input class="form-control" type="search" name="searchString" placeholder="Search Term" />
+            <button type="submit" class="btn btn-secondary">Search</button>
+        </div>
+    </form>
+    <form asp-action="Index" asp-controller="Contacts" class="col-12 col-md-4 mb-3">
+        <div class="input-group">
+            <span class="input-group-text" id="">Category Filter</span>
+            <select name="CategoryId" asp-items="@ViewBag.CategoryId" class="form-control"
+                    onchange="this.form.submit()" onfocus="this.selectedIndex=-1;this.blur();">
+                <option>All Contacts</option>
+            </select>
 
-                @foreach (var contact in Model)
-                {
-                    <div class="col">
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 square-img-container">
-                                <img src="@ImageService.ConvertByteArrayToFile(contact.ImageData!, contact.ImageType!)" class="square-img rounded-start">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@Html.DisplayFor(modelItem => contact.FullName)</h5>
-                                        <address class="card-text">
-                                            @Html.DisplayFor(model => contact.Address1)<br>
-                                            @Html.DisplayFor(model => contact.Address2)<br>
-                                        @Html.DisplayFor(model => contact.City),  @Html.DisplayFor(model => contact.State) @Html.DisplayFor(model => contact.ZipCode)
-                                        </address>
-                                        <div class="card-text">
-                                            <span class="fw-bold me-2">Phone:</span> @Html.DisplayFor(model => contact.PhoneNumber)
-                                        </div>
-                                        <div class="card-text">
-                                            <span class="fw-bold me-2">Email:</span> @Html.DisplayFor(model => contact.Email)
-                                        </div>
-                                        <div class="fs-4">
-                                            <a class="me-3 editIcons" asp-action="Edit" asp-route-id="@contact.Id"><i class="bi bi-pencil-fill "></i></a>
-                                            <a class="me-3 editIcons" href="#"><i class="bi bi-envelope-fill "></i></a>
-                                            <a class="me-3 editIcons" asp-action="Delete" asp-route-id="@contact.Id"><i class="bi bi-trash-fill text-danger "></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="row">
+
+    @foreach (var contact in Model)
+    {
+        <div class="col-12 col-md-6">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4 square-img-container">
+                        <img src="@ImageService.ConvertByteArrayToFile(contact.ImageData!, contact.ImageType!)" class="square-img rounded-start">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => contact.FullName)</h5>
+                            <address class="card-text">
+                                @Html.DisplayFor(model => contact.Address1)<br>
+                                @Html.DisplayFor(model => contact.Address2)<br>
+                                @Html.DisplayFor(model => contact.City),  @Html.DisplayFor(model => contact.State) @Html.DisplayFor(model => contact.ZipCode)
+                            </address>
+                            <div class="card-text">
+                                <span class="fw-bold me-2">Phone:</span> @Html.DisplayFor(model => contact.PhoneNumber)
+                            </div>
+                            <div class="card-text">
+                                <span class="fw-bold me-2">Email:</span> @Html.DisplayFor(model => contact.Email)
+                            </div>
+                            <div class="fs-4">
+                                <a class="me-3 editIcons" asp-action="Edit" asp-route-id="@contact.Id"><i class="bi bi-pencil-fill text-secondary"></i></a>
+                                <a class="me-3 editIcons" href="#"><i class="bi bi-envelope-fill text-secondary"></i></a>
+                                <a class="me-3 editIcons" asp-action="Delete" asp-route-id="@contact.Id"><i class="bi bi-trash-fill text-danger "></i></a>
                             </div>
                         </div>
                     </div>
-             
-                }
-
+                </div>
+            </div>
         </div>
-    </div>
+
+    }
 
 </div>
 
@@ -129,4 +124,7 @@
 
 
 
-      
+
+
+
+

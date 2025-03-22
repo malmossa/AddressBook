@@ -10,9 +10,6 @@ html {
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
 
 html {
     position: relative;
@@ -22,6 +19,7 @@ html {
 body {
     margin-bottom: 60px;
 }
+
 
 .navbar-brand {
     font-family: "Uncial Antiqua", system-ui;
@@ -34,8 +32,6 @@ body {
 
 .square-img-container {
     position: relative;
-    border: 1px solid black;
-    border-radius: 5px;
 }
 
 .square-img-container::after {  
@@ -54,16 +50,13 @@ body {
 
 
 /* FOOTER */
-footer {
-    color: #404040;
-}
 
 .footer-brand i {
     color: red;
 }
 
 .footer-brand a {
-    color: #404040 !important;
+    color: white !important;
     text-decoration: none;
     font-style: italic;
 }
