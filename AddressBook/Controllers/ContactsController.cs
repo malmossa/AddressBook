@@ -32,8 +32,27 @@ namespace AddressBook.Controllers
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Contacts.Include(c => c.AppUser);
-            return View(await applicationDbContext.ToListAsync());
+            List<Contact> contacts = new List<Contact>();
+            string appUserId = _userManager.GetUserId(User);
+
+            // return the user id and their associated contacts and categories
+            AppUser appUser = _context.Users
+                              .Include(u => u.Contacts)
+                              .ThenInclude(u => u.Categories)
+                              .Include(u => u.Categories)
+                              .FirstOrDefault(u => u.Id == appUserId)!;
+
+            var categories = appUser.Categories;
+
+            contacts = appUser.Contacts
+                              .OrderBy(c => c.LastName)
+                              .ThenBy(c => c.FirstName)
+                              .ToList();
+
+            ViewData["CategoryId"] = new SelectList(categories, "Id", "Name");
+
+            return View(contacts);
+
         }
 
         // GET: Contacts/Details/5
