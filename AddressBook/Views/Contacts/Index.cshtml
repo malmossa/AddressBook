@@ -25,11 +25,12 @@
     <form asp-action="Index" asp-controller="Contacts" class="col-12 col-md-4 mb-3">
         <div class="input-group">
             <span class="input-group-text" id="">Category Filter</span>
-            <select name="CategoryId" asp-items="@ViewBag.CategoryId" class="form-control" onchange="this.form.submit()" onfocus="this.selectedIndex=-1;this.blur();">
+            <select name="CategoryId" asp-items="@ViewBag.CategoryId" class="form-control" 
+                    onchange="this.form.submit()" 
+                    onfocus="this.selectedIndex=-1;this.blur();">
                 <option>All Contacts</option>
             </select>
-
-        </div>
+        </div> 
     </form>
 </div>
 
