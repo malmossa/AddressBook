@@ -21,7 +21,7 @@ namespace AddressBook.Services
                 if (!await IsContactInCategory(categoryId, contactId))
                 {
                     Contact? contact = await _context.Contacts.FindAsync(contactId);
-                    Category? category = await _context.Categories.FindAsync(contactId);
+                    Category? category = await _context.Categories.FindAsync(categoryId);
 
                     if (category != null && contact != null)
                     {
@@ -31,7 +31,7 @@ namespace AddressBook.Services
                 }
 
             }
-            catch
+            catch (Exception)
             {
                 throw;
             }
