@@ -26,8 +26,8 @@
         <div class="input-group">
             <span class="input-group-text" id="">Category Filter</span>
             <select name="CategoryId" asp-items="@ViewBag.CategoryId" class="form-control" 
-                    onchange="this.form.submit()" 
-                    onfocus="this.selectedIndex=-1;this.blur();">
+            onchange="this.form.submit()" 
+            onfocus="this.selectedIndex=-1;this.blur();">
                 <option>All Contacts</option>
             </select>
         </div> 
@@ -50,7 +50,10 @@
                             <h5 class="card-title">@Html.DisplayFor(modelItem => contact.FullName)</h5>
                             <address class="card-text">
                                 @Html.DisplayFor(model => contact.Address1)<br>
-                                @Html.DisplayFor(model => contact.Address2)<br>
+                                @if (contact.Address2 != null)
+                                {
+                                    @Html.DisplayFor(model => contact.Address2)<br>                                 
+                                }
                                 @Html.DisplayFor(model => contact.City),  @Html.DisplayFor(model => contact.State) @Html.DisplayFor(model => contact.ZipCode)
                             </address>
                             <div class="card-text">
