@@ -68,11 +68,14 @@
                                     @Html.DisplayFor(model => contact.City),  @Html.DisplayFor(model => contact.State) @Html.DisplayFor(model => contact.ZipCode)
                                 </address>
                                 <div class="card-text">
+                                    <span class="fw-bold me-2">DOB:</span> @Html.DisplayFor(model => contact.BirthDate)
+                                </div>
+                                <div class="card-text">
                                     <span class="fw-bold me-2">Phone:</span> @Html.DisplayFor(model => contact.PhoneNumber)
                                 </div>
                                 <div class="card-text">
                                     <span class="fw-bold me-2">Email:</span> @Html.DisplayFor(model => contact.Email)
-                                </div>
+                                </div>           
                                 <div class="fs-4">
                                     <a class="me-3 editIcons" asp-action="Edit" asp-route-id="@contact.Id"><i class="bi bi-pencil-fill text-secondary"></i></a>
                                     <a class="me-3 editIcons" href="#"><i class="bi bi-envelope-fill text-secondary"></i></a>
