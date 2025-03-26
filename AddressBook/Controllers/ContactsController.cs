@@ -96,6 +96,11 @@ namespace AddressBook.Controllers
             return View(nameof(Index), contacts);
         }
 
+        public IActionResult EmailContact(int contactId)
+        {
+            return View();
+        }
+
         // GET: Contacts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
