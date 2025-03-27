@@ -1,6 +1,7 @@
 ﻿using AddressBook.Data;
 using AddressBook.Enums;
 using AddressBook.Models;
+using AddressBook.Models.ViewModels;
 using AddressBook.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -96,9 +97,31 @@ namespace AddressBook.Controllers
             return View(nameof(Index), contacts);
         }
 
-        public IActionResult EmailContact(int contactId)
+        public async Task<IActionResult> EmailContact(int id)
         {
-            return View();
+            string appUserId = _userManager?.GetUserId(User);
+            Contact contact = await _context.Contacts.Where(c => c.Id == id && c.AppUserID == appUserId)
+                                                     .FirstOrDefaultAsync();
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            EmailData emailData = new EmailData()
+            {
+                EmailAddress = contact.Email,
+                FirstName = contact.FirstName,
+                LastName = contact.LastName
+            };
+
+            EmailContactViewModel model = new EmailContactViewModel()
+            {
+                Contact = contact,
+                EmailData = emailData
+            };
+
+            return View(model);
         }
 
         // GET: Contacts/Details/5
