@@ -47,6 +47,7 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: top;
+    border-radius: 3px;
 }
 
 
