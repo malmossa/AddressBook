@@ -215,7 +215,8 @@ namespace AddressBook.Controllers
                 }
                 // Save each category selected to the contactCategories table.
 
-                return RedirectToAction(nameof(Index));
+                
+                return RedirectToAction("Index", "Contacts", new { swalMessage = "Success: Contact is Created!" });
             }
 
             return RedirectToAction(nameof(Index));
@@ -305,8 +306,10 @@ namespace AddressBook.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
+                return RedirectToAction("Index", "Contacts", new { swalMessage = "Success: Contact is Updated!" });
             }
+
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserID);
             return View(contact);
         }
@@ -345,8 +348,7 @@ namespace AddressBook.Controllers
                 _context.Contacts.Remove(contact);
                 await _context.SaveChangesAsync();
             }
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Contacts", new { swalMessage = "Success: Contact is Deleted!" });         
         }
 
         private bool ContactExists(int id)
