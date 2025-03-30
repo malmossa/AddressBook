@@ -212,11 +212,8 @@ namespace AddressBook.Controllers
                 foreach (int categoryId in CategoryList)
                 {
                     await _addressBookService.AddContactToCategoryAsync(categoryId, contact.Id);
-                }
-                // Save each category selected to the contactCategories table.
+                }               
 
-                
-                return RedirectToAction("Index", "Contacts", new { swalMessage = "Success: Contact is Created!" });
             }
 
             return RedirectToAction(nameof(Index));
@@ -307,7 +304,7 @@ namespace AddressBook.Controllers
                     }
                 }
                 
-                return RedirectToAction("Index", "Contacts", new { swalMessage = "Success: Contact is Updated!" });
+                return RedirectToAction("Index");
             }
 
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserID);
@@ -348,7 +345,7 @@ namespace AddressBook.Controllers
                 _context.Contacts.Remove(contact);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "Contacts", new { swalMessage = "Success: Contact is Deleted!" });         
+            return RedirectToAction("Index");         
         }
 
         private bool ContactExists(int id)
