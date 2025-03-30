@@ -1,5 +1,6 @@
 ﻿using AddressBook.Data;
 using AddressBook.Models;
+using AddressBook.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +24,14 @@ namespace AddressBook.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Categories.Include(c => c.AppUser);
-            return View(await applicationDbContext.ToListAsync());
+            string appUserId = _userManager.GetUserId(User);
+
+            var categories = await _context.Categories.Where(c => c.AppUserID == appUserId)
+                                                      .Include(c => c.AppUser)
+                                                      .ToListAsync();
+                                                      
+
+            return View(categories);
         }
 
         // GET: Categories/Details/5
