@@ -30,8 +30,33 @@ namespace AddressBook.Controllers
                                                       .Include(c => c.AppUser)
                                                       .ToListAsync();
                                                       
-
             return View(categories);
+        }
+
+        public async Task<IActionResult> EmailCategory(int id)
+        {
+            string appUserId = _userManager.GetUserId(User);
+
+            Category category = await _context.Categories
+                                              .Include(c => c.Contacts)
+                                              .FirstOrDefaultAsync(c => c.Id == id && c.AppUserID == appUserId);
+
+            List<string> emails = category.Contacts.Select(c => c.Email).ToList();
+
+            EmailData emailData = new EmailData()
+            {
+                GroupName = category.Name,
+                EmailAddress = String.Join("; ", emails),
+                Subject = $"Group Message: {category.Name}"
+            };
+
+            EmailCategoryViewModel model = new EmailCategoryViewModel()
+            {
+                Contacts = category.Contacts.ToList(),
+                EmailData = emailData
+            };
+
+            return View(model);
         }
 
         // GET: Categories/Details/5
@@ -56,7 +81,6 @@ namespace AddressBook.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -67,15 +91,19 @@ namespace AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AppUserID,Name")] Category category)
         {
+            ModelState.Remove("AppUserID");
+
             if (ModelState.IsValid)
             {
+                string appUserId = _userManager.GetUserId(User);
+                category.AppUserID = appUserId;
+
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserID);
-
+           
             return View(category);
         }
 
@@ -105,7 +133,7 @@ namespace AddressBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AppUserId,Name")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AppUserID,Name")] Category category)
         {
             if (id != category.Id)
             {

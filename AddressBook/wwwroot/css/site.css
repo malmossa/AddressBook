@@ -62,3 +62,10 @@ body {
     text-decoration: none;
     font-style: italic;
 }
+
+textarea[readonly] {
+    background-color: #e9ecef; /* Light gray */
+    opacity: 0.50; /* Makes it appear dimmer */
+    cursor: not-allowed; /* Indicates it can't be interacted with */
+}
+
