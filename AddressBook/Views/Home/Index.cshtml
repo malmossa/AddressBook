@@ -11,7 +11,7 @@
             <div class="subtitle">
                 <p>Keep all your contacts together in one convenient place. Simplify event planning and ensure everyone stays informed!</p>
                 <h4>Futures Highlights:</h4>
-                <ul>
+                <ul class="mb-5">
                     <li>Adopt PostgreSQL as the database solution.</li>
                     <li>Implement Identity Framework for user management.</li>
                     <li>Enable contact search functionality.</li>
@@ -30,8 +30,10 @@
             </div>
             @if (!User.Identity.IsAuthenticated)
             {
+                <p class="mt-5"><strong>Try it Out: </strong> Create a new account by clicking on the button below or use the DEMO account: </p>
+                <p>Email: masondev73@gmail.com / Password: Demo_123456</p>
                 <div class="text-start mt-3">
-                    <a class="btn btn-lg btn-outline-secondary rounded-pill" asp-area="Identity" asp-page="/Account/Register">See It in Action</a>
+                    <a class="btn btn-outline-secondary rounded-pill" asp-area="Identity" asp-page="/Account/Register">Register</a>
                 </div>          
             }
         </div>
