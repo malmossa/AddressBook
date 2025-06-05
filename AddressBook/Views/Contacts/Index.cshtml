@@ -49,6 +49,12 @@
 
         @foreach (var contact in Model)
         {
+            // Format phone number
+            string formattedPhoneNumber = contact.PhoneNumber?.Length == 10
+            ? $"({contact.PhoneNumber.Substring(0, 3)}) {contact.PhoneNumber.Substring(3, 3)}-{contact.PhoneNumber.Substring(6, 4)}"
+            : contact.PhoneNumber;
+
+
             <div class="col-12 col-md-6">
                 <div class="card mb-3">
                     <div class="row g-0">
@@ -72,7 +78,7 @@
                                     <span class="fw-bold me-2">DOB:</span> @Html.DisplayFor(model => contact.BirthDate)
                                 </div>
                                 <div class="card-text">
-                                    <span class="fw-bold me-2">Phone:</span> @Html.DisplayFor(model => contact.PhoneNumber))
+                                    <span class="fw-bold me-2">Phone:</span> @formattedPhoneNumber
                                 </div>
                                 <div class="card-text">
                                     <span class="fw-bold me-2">Email:</span> @Html.DisplayFor(model => contact.Email)
