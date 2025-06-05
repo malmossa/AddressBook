@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
@@ -27,9 +28,12 @@
                 <i class="devicon-bootstrap-plain-wordmark colored icon"></i>
                 <i class="devicon-heroku-plain-wordmark colored icon"></i>
             </div>
-            <div class="text-start mt-3">
-                <a class="btn btn-lg btn-outline-secondary rounded-pill" asp-area="Identity" asp-page="/Account/Register">See It in Action</a>
-            </div>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="text-start mt-3">
+                    <a class="btn btn-lg btn-outline-secondary rounded-pill" asp-area="Identity" asp-page="/Account/Register">See It in Action</a>
+                </div>          
+            }
         </div>
     </div>
     <div class="col-12 col-md-6 col-lg-7 text-center">
